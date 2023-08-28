@@ -68,7 +68,9 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
 
   @override
   void initState() {
-    _mPlayer!.openAudioSession().then((value) {
+    _mPlayer!.openAudioSession(
+      device: AudioDevice.blueTooth
+    ).then((value) {
       setState(() {
         _mPlayerIsInited = true;
       });
@@ -99,7 +101,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
         throw RecordingPermissionException('Microphone permission not granted');
       }
     }
-    await _mRecorder!.openAudioSession();
+    await _mRecorder!.openAudioSession(device: AudioDevice.blueTooth);
     if (!await _mRecorder!.isEncoderSupported(_codec) && kIsWeb) {
       _codec = Codec.opusWebM;
       _mPath = 'tau_file.webm';
@@ -118,7 +120,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
         .startRecorder(
       toFile: _mPath,
       codec: _codec,
-      audioSource: theSource,
+      audioSource: AudioSource.bluetoothHFP,
     )
         .then((value) {
       setState(() {});

@@ -1,0 +1,1 @@
+../../../../.symlinks/plugins/flutter_sound_lite/ios/Classes/FlutterSoundRecorder.h
